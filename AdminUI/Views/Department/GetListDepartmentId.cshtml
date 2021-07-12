@@ -1,0 +1,21 @@
+﻿@model List<Entities.Concrete.Personel>
+@{
+    ViewBag.Title = "GetListDepartmentId";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-hover">
+    <br />
+    <tr>
+        <th>Departman Adı</th>
+        <th>Personeller</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Department.Name</td>
+            <td>@item.Name @item.Surname</td>
+            <a href=""
+        </tr>
+    }
+</table>

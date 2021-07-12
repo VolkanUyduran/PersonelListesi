@@ -1,0 +1,31 @@
+﻿@model  Entities.Concrete.Personel
+@{
+    ViewBag.Title = "EditPersonel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Personel  Bilgi Güncelleme Sayfası</h2>
+@using (Html.BeginForm("EditPersonel", "Personel", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Personel Adı")
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Personel Soyadı")
+        @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Telefon Numarası")
+        @Html.TextBoxFor(x => x.Tel, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Yöneticisi")
+        @Html.DropDownListFor(x => x.DirectorId, (List<SelectListItem>)ViewBag.vldi, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Departmanı")
+        @Html.DropDownListFor(x => x.DepartmentId, (List<SelectListItem>)ViewBag.vld, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Doğum Tarihi")
+        @Html.TextBoxFor(x => x.DateOfBirth)
+        <br />
+        <button class="btn btn-success">Güncelle</button>
+    </div>
+}

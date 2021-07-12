@@ -1,0 +1,29 @@
+﻿@model List<Entities.Concrete.Department>
+@{
+    ViewBag.Title = "DepartmentList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-hover">
+    <br />
+    <a href="/Department/AddDepartment" class="btn btn-primary">Yeni Departman Ekle</a>
+    <tr>
+        <th>ID</th>
+        <th>Departman Adı</th>
+        <th>Çalışanlar</th>
+        <th>Düzenle</th>
+        <th>Sil</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.DepartmentId</td>
+    <td>@item.Name</td>
+    <td> <a href="/Department/GetListDepartmentId/@item.DepartmentId" class="btn btn-primary">Çalışanlar</a></td>
+    <td><a href="/Department/EditDepartment/@item.DepartmentId" class="btn btn-secondary">Güncelle</a></td>
+
+    <td> <a href="/Department/DeleteDepartment/@item.DepartmentId" class="btn btn-danger">Sil</a></td>
+</tr>
+    }
+</table>

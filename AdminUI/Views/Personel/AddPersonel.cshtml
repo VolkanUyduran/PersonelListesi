@@ -1,0 +1,42 @@
+﻿@model  Entities.Concrete.Personel
+@{
+    ViewBag.Title = "AddPersonel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Personel Ekleme Sayfası</h1>
+
+<br />
+
+@using (Html.BeginForm("AddPersonel", "Personel", FormMethod.Post))
+{
+    
+<div class="form-group">
+
+    @Html.Label("Personel Adı")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name)
+    <br /><br />
+    @Html.Label("Personel Soyadı")
+    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Surname)
+    <br /><br />
+    @Html.Label("Telefon Numarası")
+    @Html.TextBoxFor(x => x.Tel, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Tel)
+    <br /><br />
+    @Html.Label("Yöneticisi")
+    @Html.DropDownListFor(x => x.DirectorId, (List<SelectListItem>)ViewBag.vlw, new { @class = "form-control" })
+    <br /><br />
+    @Html.Label("Departmanı")
+    @Html.DropDownListFor(x => x.DepartmentId, (List<SelectListItem>)ViewBag.vlc, new { @class = "form-control" })
+    <br /><br />
+    @Html.Label("Doğum Tarihi")
+    @Html.TextBoxFor(x => x.DateOfBirth)
+
+    @*@Html.ValidationMessageFor(x => x.CategoryDescription)*@
+    <br /><br />
+    <button class="btn btn-info">Kaydet</button>
+
+</div>
+}

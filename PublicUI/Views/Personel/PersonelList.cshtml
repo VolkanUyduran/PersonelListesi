@@ -1,0 +1,30 @@
+﻿@model  List<Entities.Concrete.Personel>
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Telefon</th>
+        <th>Departman</th>
+        <th>Doğum Tarihi</th>
+        <th>Yönetici Bilgileri</th>
+        <th>Resimleri</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Surname</td>
+            <td>@item.Tel</td>
+            <td>@item.Department.Name</td>
+            <td>@item.DateOfBirth</td>
+            <td>@item.Director.Name</td>
+            <td><a href="/Personel/GetPersonelImage/@item.Id">@item.Name @item.Surname </a></td>
+        </tr>
+    }
+</table>
