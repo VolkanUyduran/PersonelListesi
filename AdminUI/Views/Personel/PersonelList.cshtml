@@ -3,8 +3,6 @@
     ViewBag.Title = "PersonelList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 <table class="table table-hover">
     <br />
     <a href="/Personel/AddPersonel" class="btn btn-primary">Personel Ekle</a>
@@ -16,24 +14,29 @@
         <th>Departman</th>
         <th>Doğum Tarihi</th>
         <th>Yönetici Bilgileri</th>
-        <th>Resimleri</th>
+        <th>Resimleri/ResimEkle</th>
         <th>Düzenle</th>
         <th>Sil</th>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td>@item.Surname</td>
-            <td>@item.Tel</td>
-            <td>@item.Department.Name</td>
-            <td>@item.DateOfBirth</td>
-            <td>@item.Director.Name</td>
+<tr>
+    <td>@item.Id</td>
+    <td>@item.Name</td>
+    <td>@item.Surname</td>
+    <td>@item.Tel</td>
+    <td>@item.Department.Name</td>
+    <td>@(((DateTime)item.DateOfBirth).ToString("dd-MMM-yyyy"))</td>
+    <td>@item.Director.Name</td>
 
-            <td><a href="/Personel/GetPersonelImage/@item.Id">@item.Name @item.Surname </a></td>
-            <td><a href="/Personel/EditPersonel/@item.Id" class="btn btn-info">Düzenle</a></td>
-            <td><a href="/Personel/DeletePersonel/@item.Id" class="btn btn-warning">Sil</a></td>
-        </tr>
+    <td>
+        <a href="/Image/GetPersonelImage/@item.Id">
+            @item.Name @item.Surname Resimleri<br /><br />
+            <a href="/Image/AddImage/@item.Id" class="btn btn-outline-info">Yeni Resim Ekle </a>
+        </a>
+    </td>
+    <td><a href="/Personel/EditPersonel/@item.Id" class="btn btn-info">Düzenle</a></td>
+    <td><a href="/Personel/DeletePersonel/@item.Id" class="btn btn-warning">Sil</a></td>
+</tr>
     }
 </table>

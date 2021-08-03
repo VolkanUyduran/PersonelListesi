@@ -15,8 +15,7 @@ namespace AdminUI.Controllers
     public class PersonelController : Controller
     {
         PersonelManager personelManager = new PersonelManager(new EfPersonelDal());
-        ImageFileManager ımageFileManager = new ImageFileManager(new EFImageDal());
-        DepartmentManager departmentManager = new DepartmentManager(new EfDepartmentDal(),new EfPersonelDal());
+        DepartmentManager departmentManager = new DepartmentManager(new EfDepartmentDal());
         DirectorManager directorManager = new DirectorManager(new EfDirectorDal());
         PersonelValidator personelValidator = new PersonelValidator();
 
@@ -24,11 +23,6 @@ namespace AdminUI.Controllers
         {
             var values = personelManager.GetList();
             return View(values);
-        }
-        public ActionResult GetPersonelImage(int id)
-        {
-            var value = ımageFileManager.GetListByPersonelId(id);
-            return View(value);
         }
         [HttpGet]
         public ActionResult AddPersonel()
@@ -57,7 +51,6 @@ namespace AdminUI.Controllers
             ValidationResult validationResult = personelValidator.Validate(personel);
             if (validationResult.IsValid)
             {
-                personel.DateOfBirth = DateTime.Parse(DateTime.Now.ToShortDateString());
                 personelManager.Add(personel);
                 return RedirectToAction("PersonelList");
             }
@@ -99,18 +92,10 @@ namespace AdminUI.Controllers
             personelManager.Update(personel);
             return RedirectToAction("PersonelList");
         }
-        [HttpGet]
         public ActionResult DeletePersonel(int id)
         {
             var result = personelManager.GetById(id);
             personelManager.Delete(result);
-            return RedirectToAction("PersonelList");
-        }
-        [HttpPost]
-        public ActionResult DeletePersonel(Personel personel)
-        {
-            
-            personelManager.Delete(personel);
             return RedirectToAction("PersonelList");
         }
     }

@@ -12,10 +12,11 @@ using System.Web.Security;
 
 namespace AdminUI.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
 
-        IAuthService authService = new AuthManager(new DirectorManager(new EfDirectorDal()));
+        IAuthService authService = new AuthManager(new DirectorManager(new EfDirectorDal()), new RoleManager(new EfRoleDal()));
         [HttpGet]
         public ActionResult Index()
         {
@@ -27,7 +28,7 @@ namespace AdminUI.Controllers
 
             if (authService.Login(loginDto))
             {
-                //FormsAuthentication.SetAuthCookie(loginDto.AdminMail, false);
+                FormsAuthentication.SetAuthCookie(loginDto.AdminMail, false);
                 Session["AdminMail"] = loginDto.AdminMail;
                 return RedirectToAction("PersonelList", "Personel");
             }
@@ -37,6 +38,11 @@ namespace AdminUI.Controllers
                 return View();
             }
 
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
         }
     }
 }

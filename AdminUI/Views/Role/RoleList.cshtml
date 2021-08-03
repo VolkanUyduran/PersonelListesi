@@ -1,0 +1,29 @@
+﻿@model List<Entities.Concrete.Role>
+@{
+    ViewBag.Title = "RoleList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-hover">
+    <br />
+    <a href="/Role/AddRole" class="btn btn-primary">Yeni Rol Ekle</a>
+    <tr>
+        <th>ID</th>
+        <th>Rol Adı</th>
+        <th>Açıklama</th>
+        <th>Güncelleme</th>
+        <th>Sil</th>
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.RoleId</td>
+            <td>@item.RoleName</td>
+            <td>@item.Description</td>
+            <td><a href="/Role/EditRole/@item.RoleId" class="btn btn-warning">Rolü güncelle</a></td>
+            <td><a href="/Role/DeleteRole/@item.RoleId" class="btn btn-danger">Rolü Sil</a></td>
+        </tr>
+
+    }
+</table>

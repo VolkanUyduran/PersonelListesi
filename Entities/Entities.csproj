@@ -64,6 +64,7 @@
     <Compile Include="Concrete\Director.cs" />
     <Compile Include="Concrete\ImageFile.cs" />
     <Compile Include="Concrete\Personel.cs" />
+    <Compile Include="Concrete\Role.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

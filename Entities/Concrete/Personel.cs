@@ -22,7 +22,7 @@ namespace Entities.Concrete
         public virtual Department Department { get; set; }
         public int DirectorId { get; set; }
         public virtual Director Director { get; set; }
-        public ICollection<ImageFile> ImageFiles { get; set; }
+        public ICollection<ImageFile> ımageFiles { get; set; }
 
     }
 }

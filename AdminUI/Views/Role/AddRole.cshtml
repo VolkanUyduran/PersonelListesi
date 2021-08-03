@@ -1,0 +1,24 @@
+﻿@model  Entities.Concrete.Role
+@{
+    ViewBag.Title = "AddRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Departman Ekleme Sayfası</h1>
+
+<br />
+
+@using (Html.BeginForm("AddRole", "Role", FormMethod.Post))
+{
+
+<div class="form-group">
+
+    @Html.Label("Rol Adı")
+    @Html.TextBoxFor(x => x.RoleName, new { @class = "form-control" })
+    <br /><br />
+    @Html.Label("Açıklama")
+    @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+    <br /><br />
+    <button class="btn btn-info">Kaydet</button>
+</div>
+}

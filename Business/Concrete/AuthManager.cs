@@ -14,7 +14,7 @@ namespace Business.Concrete
     {
         IDirectorService _directorService;
 
-        public AuthManager(IDirectorService directorService)
+        public AuthManager(IDirectorService directorService, IRoleService roleService)
         {
             _directorService = directorService;
         }
@@ -35,13 +35,13 @@ namespace Business.Concrete
             }
         }
 
-        public void Register(string name, string mail, string password)
+        public void Register(string name, string mail, string password,int adminRole)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var admin = new Director
             {
-                
+                RoleId= adminRole,
                 Email = mail,
                 AdminPasswordHash = passwordHash,
                 AdminPasswordSalt = passwordSalt,

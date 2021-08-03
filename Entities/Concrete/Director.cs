@@ -18,5 +18,9 @@ namespace Entities.Concrete
         public byte[] AdminPasswordHash { get; set; }
         public byte[] AdminPasswordSalt { get; set; }
         public ICollection<Personel> Personels { get; set; }
+
+        public int? RoleId { get; set; }
+
+        public virtual Role Role { get; set; }
     }
 }

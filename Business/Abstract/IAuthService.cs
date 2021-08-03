@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
    public  interface IAuthService
     {
-        void Register(string name, string mail, string password);
+        void Register(string name, string mail, string password,int adminRole);
         bool Login(LoginDto loginDto);
     }
 } 

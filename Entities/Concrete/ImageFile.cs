@@ -15,6 +15,5 @@ namespace Entities.Concrete
         public string ImagePath { get; set; }
         public int Id { get; set; }
         public virtual Personel Personel { get; set; }
-
     }
 }

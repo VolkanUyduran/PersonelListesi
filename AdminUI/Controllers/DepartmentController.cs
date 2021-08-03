@@ -12,7 +12,7 @@ namespace AdminUI.Controllers
 {
     public class DepartmentController : Controller
     {
-        DepartmentManager departmentManager = new DepartmentManager(new EfDepartmentDal(),new EfPersonelDal());
+        DepartmentManager departmentManager = new DepartmentManager(new EfDepartmentDal());
         PersonelManager personelManager = new PersonelManager(new EfPersonelDal());
 
         public ActionResult DepartmentList()
@@ -37,26 +37,12 @@ namespace AdminUI.Controllers
         {
             return View();
         }
-        [HttpGet]
+
         public ActionResult DeleteDepartment(int id)
         {
             var result = departmentManager.GetById(id);
-            return View(result);
-        }
-        [HttpPost]
-        public ActionResult DeleteDepartment(Department department,int id)
-        {
-            if (department.Personels.Any(x => x.DepartmentId == id))
-            {
-                TempData["Message"] = "Silmek istediginiz departmanda çalışan oldugundan silinemedi.";
-
-            }
-            else
-            {
-                departmentManager.Delete(department,id);
-                
-            };
-            return RedirectToAction("DepartmenList");
+            departmentManager.Delete(result);
+            return RedirectToAction("DepartmentList");
         }
         [HttpGet]
         public ActionResult EditDepartment(int id)

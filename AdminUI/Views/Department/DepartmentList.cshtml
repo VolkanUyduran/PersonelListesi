@@ -17,13 +17,13 @@
     </tr>
     @foreach (var item in Model)
     {
-<tr>
-    <td>@item.DepartmentId</td>
-    <td>@item.Name</td>
-    <td> <a href="/Department/GetListDepartmentId/@item.DepartmentId" class="btn btn-primary">Çalışanlar</a></td>
-    <td><a href="/Department/EditDepartment/@item.DepartmentId" class="btn btn-secondary">Güncelle</a></td>
+        <tr>
+            <td>@item.DepartmentId</td>
+            <td>@item.Name</td>
+            <td> <a href="/Department/GetListDepartmentId/@item.DepartmentId" class="btn btn-primary">Çalışanlar</a></td>
+            <td><a href="/Department/EditDepartment/@item.DepartmentId" class="btn btn-secondary">Güncelle</a></td>
 
-    <td> <a href="/Department/DeleteDepartment/@item.DepartmentId" class="btn btn-danger">Sil</a></td>
-</tr>
+            <td> <a href="/Department/DeleteDepartment/@item.DepartmentId" class="btn btn-danger">Sil</a></td>
+        </tr>
     }
 </table>

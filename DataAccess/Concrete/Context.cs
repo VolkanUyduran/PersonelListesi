@@ -14,5 +14,6 @@ namespace DataAccess.Concrete
         public DbSet<Director> Directors { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<ImageFile> ImageFiles { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }

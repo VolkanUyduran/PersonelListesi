@@ -12,12 +12,10 @@ namespace Business.Concrete
    public class DepartmentManager:IDepartmentService
     {
         IDepartmentDal _departmentDal;
-        IPersonelDal _personelDal;
 
-        public DepartmentManager(IDepartmentDal departmentDal, IPersonelDal personelDal)
+        public DepartmentManager(IDepartmentDal departmentDal)
         {
             _departmentDal = departmentDal;
-            _personelDal = personelDal;
         }
 
         public void Add(Department department)
@@ -25,20 +23,9 @@ namespace Business.Concrete
             _departmentDal.Insert(department);
         }
 
-        public void Delete(Department department,int id)
+        public void Delete(Department department)
         {
-            if (department.Personels.Any())
-            {
-                if (department.DepartmentId==id)
-                {
-                    Console.WriteLine("Silmek istediginiz departmanda çalışan oldugundan silinemedi.");
-                }
-            }
-            else
-            {
-                _departmentDal.Delete(department);
-            };
-            
+            _departmentDal.Delete(department);
         }
 
         public Department GetById(int id)
