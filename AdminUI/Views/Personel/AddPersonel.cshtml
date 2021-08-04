@@ -3,12 +3,37 @@
 
 @{
     ViewBag.Title = "AddPersonel";
-
-
     Layout = "~/Views/Shared/_AdminLayout.cshtml"; //Scriptler çakıştığı için datepicker görülemiyor.Bu satırı commitleyip aşagığdaki
                                                    //satırı committen çıkartırsanız dogum tarihini datepicker olarak görebilirsiniz.Ancak template görülmeyecektir
                                                    // sadece basic bir sayfa görülecektir//
 }
+
+<!--<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />-->
+
+
+@*@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        $(function)(){
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+               // yearRange:"2010:2022",
+                minDate: new Date(2021, 0, 1),
+                maxDate:new Date(2021,0,1),
+                showOn: "both",
+                buttonText:"<i class='fa fa-calendar'></i>"
+            })
+        });
+
+    </script>
+
+}*@
+
+
 
 
 <h1>Yeni Personel Ekleme Sayfası</h1>
