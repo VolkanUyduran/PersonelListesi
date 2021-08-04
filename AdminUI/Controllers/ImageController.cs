@@ -45,6 +45,7 @@ namespace AdminUI.Controllers
             //Eger dosya yolu mevcut degilse,yeni dosya yolu olustur
             string folderPath = Server.MapPath("~/Images/Gallery/");
 
+
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);

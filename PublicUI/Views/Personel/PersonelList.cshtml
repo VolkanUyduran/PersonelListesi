@@ -12,7 +12,7 @@
         <th>Departman</th>
         <th>Doğum Tarihi</th>
         <th>Yönetici Bilgileri</th>
-        <th>Resimleri</th>
+        <th>Personel Resimleri</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -22,7 +22,7 @@
             <td>@item.Surname</td>
             <td>@item.Tel</td>
             <td>@item.Department.Name</td>
-            <td>@item.DateOfBirth</td>
+            <td>@(((DateTime)item.DateOfBirth).ToString("dd-MMM-yyyy"))</td>
             <td>@item.Director.Name</td>
             <td><a href="/Personel/GetPersonelImage/@item.Id">@item.Name @item.Surname </a></td>
         </tr>

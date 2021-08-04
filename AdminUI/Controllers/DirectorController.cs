@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AdminUI.Controllers
 {
+   
     public class DirectorController : Controller
     {
         DirectorManager directorManager = new DirectorManager(new EfDirectorDal());
