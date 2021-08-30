@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.EntitiyFramework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,6 +18,7 @@ namespace PublicUI.Controllers
         [HttpGet]
         public ActionResult PersonelList()
         {
+           
             var values = personelManager.GetList();
             return View(values);
         }
@@ -24,6 +26,7 @@ namespace PublicUI.Controllers
         [HttpGet]
         public ActionResult GetPersonelImage(int id)
         {
+
             var value = ımageFileManager.GetListByPersonelId(id);
             return View(value);
         }

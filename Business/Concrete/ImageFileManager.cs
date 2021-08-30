@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.SqlServer.Server;
+using System.Drawing.Drawing2D;
 
 namespace Business.Concrete
 {
@@ -46,6 +48,27 @@ namespace Business.Concrete
         public void Update(ImageFile ımageFile)
         {
             _ımageDal.Update(ımageFile);
+        }
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
+        public string ImageResize(Image img,int MaxWidth,int MaxHeight)
+        {
+            if (img.Width>MaxWidth || img.Height>MaxHeight)
+            {
+                double widthratio = (double)img.Width / (double)MaxWidth;
+                double heighratio = (double)img.Height / (double)MaxHeight;
+                double ratio = Math.Max(widthratio, heighratio);
+                int newWidth = (int)(img.Width / ratio);
+                int newHeight = (int)(img.Height / ratio);
+
+                return newHeight.ToString() + "," + newWidth.ToString();
+            }
+            else
+            {
+                return img.Height.ToString() + "," + img.Width.ToString();
+            }
         }
     }
 }

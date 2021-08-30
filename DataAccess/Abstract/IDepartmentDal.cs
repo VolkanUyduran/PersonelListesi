@@ -9,5 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface IDepartmentDal : IRepository<Department>
     {
+        int PersonelCountByDepartmentId(int departmentId);
     }
 }

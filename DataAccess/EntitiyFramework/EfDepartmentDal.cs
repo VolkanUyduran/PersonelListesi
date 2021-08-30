@@ -9,7 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntitiyFramework
 {
-    public class EfDepartmentDal:GenericRepository<Department>,IDepartmentDal
+    public class EfDepartmentDal : GenericRepository<Department>, IDepartmentDal
     {
+        public int PersonelCountByDepartmentId(int departmentId)
+        {
+            var personelCount = c.Personels.Where(x => x.DepartmentId == departmentId).ToList();
+            return personelCount.Count();
+        }
     }
 }

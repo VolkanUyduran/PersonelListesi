@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,10 @@ namespace DataAccess.Abstract
 {
     public interface IDirectorDal : IRepository<Director>
     {
+        Director GetUser(LoginDto dto);
+        Director LoginCheck(LoginDto dto);
+        bool IsExitsAdmin();
+  
+
     }
 }

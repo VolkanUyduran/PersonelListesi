@@ -18,9 +18,10 @@ namespace Business.Concrete
             _roleDal = roleDal;
         }
 
-        public void Add(Role role)
+        public Role Add(Role role)
         {
             _roleDal.Insert(role);
+            return role;
         }
 
         public void Delete(Role role)

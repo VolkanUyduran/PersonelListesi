@@ -1,15 +1,11 @@
 ﻿using Business.Concrete;
 using DataAccess.EntitiyFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AdminUI.Controllers
 {
-   
+
     public class DirectorController : Controller
     {
         DirectorManager directorManager = new DirectorManager(new EfDirectorDal());
@@ -23,6 +19,18 @@ namespace AdminUI.Controllers
         {
             var result = directorManager.GetById(id);
             directorManager.Delete(result);
+            return RedirectToAction("DirectorList");
+        }
+        [HttpGet]
+        public ActionResult UpdateDirector(int id)
+        {
+            var adminValue = directorManager.GetById(id);
+            return View(adminValue);
+        }
+        [HttpPost]
+        public ActionResult UpdateDirector(Director director)
+        {
+            directorManager.Update(director);
             return RedirectToAction("DirectorList");
         }
     }

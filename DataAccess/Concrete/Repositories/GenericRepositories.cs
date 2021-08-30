@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.Repositories
 {
     public class GenericRepository<T> : IRepository<T> where T : class
     {
-        Context c = new Context();
+        public Context c = new Context();
         DbSet<T> _object;
 
         public GenericRepository()
@@ -34,7 +34,7 @@ namespace DataAccess.Concrete.Repositories
         {
             var addedEntity = c.Entry(p);
             addedEntity.State = EntityState.Added;
-            c.SaveChanges();
+            var result=c.SaveChanges();
         }
 
         public List<T> List()

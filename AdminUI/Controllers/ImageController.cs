@@ -9,14 +9,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-
 namespace AdminUI.Controllers
 {
     public class ImageController : Controller
     {
         ImageFileManager imageFileManager = new ImageFileManager(new EFImageDal());
         // GET: Image
-
         public ActionResult GetPersonelImage(int id)
         {
             var files = imageFileManager.GetListByPersonelId(id);
@@ -29,7 +27,7 @@ namespace AdminUI.Controllers
             var value = imageFileManager.GetListByPersonelId(id);
 
             ImageViewModel imageModel = new ImageViewModel() { FileAttach = null, Message = string.Empty, IsValid = false };
-            
+
             try { }
             catch (Exception ex)
             {
@@ -38,11 +36,8 @@ namespace AdminUI.Controllers
             return this.View(imageModel);
         }
         [HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public ActionResult AddImage(ImageViewModel imageModel, ImageFile imageFile)
         {
-            //Eger dosya yolu mevcut degilse,yeni dosya yolu olustur
             string folderPath = Server.MapPath("~/Images/Gallery/");
 
 

@@ -14,6 +14,6 @@ namespace Business.Abstract
         void Add(Department department);
         void Delete(Department department);
         void Update(Department department);
-
+        int PersonelCountByDepartmentId(int departmentId);
     }
 }

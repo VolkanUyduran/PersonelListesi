@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,9 @@ namespace Business.Abstract
         void Add(Director director);
         void Delete(Director director);
         void Update(Director director);
+        Director GetUser(LoginDto model);
+        Director CheckLogin(LoginDto model);
+        bool IsExitsAdmin();
+        bool UpdatePassword(LoginDto dto, string newPassword);
     }
 }

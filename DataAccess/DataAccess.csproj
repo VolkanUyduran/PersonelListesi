@@ -81,29 +81,9 @@
     <Compile Include="EntitiyFramework\EFImageDal.cs" />
     <Compile Include="EntitiyFramework\EfPersonelDal.cs" />
     <Compile Include="EntitiyFramework\EfRoleDal.cs" />
-    <Compile Include="Migrations\202107111247322_mig_initial.cs" />
-    <Compile Include="Migrations\202107111247322_mig_initial.Designer.cs">
-      <DependentUpon>202107111247322_mig_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107112159131_ImageName.cs" />
-    <Compile Include="Migrations\202107112159131_ImageName.Designer.cs">
-      <DependentUpon>202107112159131_ImageName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108021520517_mig_roles.cs" />
-    <Compile Include="Migrations\202108021520517_mig_roles.Designer.cs">
-      <DependentUpon>202108021520517_mig_roles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108022100502_mig_initial1.cs" />
-    <Compile Include="Migrations\202108022100502_mig_initial1.Designer.cs">
-      <DependentUpon>202108022100502_mig_initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108031140139_mig_correctid.cs" />
-    <Compile Include="Migrations\202108031140139_mig_correctid.Designer.cs">
-      <DependentUpon>202108031140139_mig_correctid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108031155404_mig_correctpersonelbyımage.cs" />
-    <Compile Include="Migrations\202108031155404_mig_correctpersonelbyımage.Designer.cs">
-      <DependentUpon>202108031155404_mig_correctpersonelbyımage.cs</DependentUpon>
+    <Compile Include="Migrations\202108291952001_init.cs" />
+    <Compile Include="Migrations\202108291952001_init.Designer.cs">
+      <DependentUpon>202108291952001_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,23 +99,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202107111247322_mig_initial.resx">
-      <DependentUpon>202107111247322_mig_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107112159131_ImageName.resx">
-      <DependentUpon>202107112159131_ImageName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108021520517_mig_roles.resx">
-      <DependentUpon>202108021520517_mig_roles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108022100502_mig_initial1.resx">
-      <DependentUpon>202108022100502_mig_initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108031140139_mig_correctid.resx">
-      <DependentUpon>202108031140139_mig_correctid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108031155404_mig_correctpersonelbyımage.resx">
-      <DependentUpon>202108031155404_mig_correctpersonelbyımage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108291952001_init.resx">
+      <DependentUpon>202108291952001_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

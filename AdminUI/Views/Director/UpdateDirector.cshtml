@@ -1,0 +1,26 @@
+﻿@model Entities.Concrete.Director
+@using 
+@{
+    ViewBag.Title = "UpdateDirector";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Profil Düzenle</h2>
+
+@using (Html.BeginForm("UpdateDirector", "Director", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.HiddenFor(x=>x.DirectorId)
+    @Html.Label("Admin Adı")
+    @Html.TextBoxFor(x => x.AdminName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Admin Durum")
+    @Html.TextBoxFor(x => x.AdminMail, new { @class = "form-control" })
+    <br />
+    @Html.Label("Rol")
+    @Html.TextBoxFor(x => x.AdminPassword, new { @class = "form-control" })
+    <br />
+    <br />
+    <button class="btn btn-success">Güncelle</button>
+</div>
+}

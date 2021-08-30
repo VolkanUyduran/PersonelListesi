@@ -1,14 +1,17 @@
 ﻿using Business.Concrete;
+using Business.Utilities.Hashing;
 using Business.Validation;
+using DataAccess.Concrete;
 using DataAccess.EntitiyFramework;
 using Entities.Concrete;
+using Entities.Dto;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Security;
 
 namespace AdminUI.Controllers
 {
@@ -17,8 +20,6 @@ namespace AdminUI.Controllers
         PersonelManager personelManager = new PersonelManager(new EfPersonelDal());
         DepartmentManager departmentManager = new DepartmentManager(new EfDepartmentDal());
         DirectorManager directorManager = new DirectorManager(new EfDirectorDal());
-        PersonelValidator personelValidator = new PersonelValidator();
-
         public ActionResult PersonelList()
         {
             var values = personelManager.GetList();
@@ -32,8 +33,7 @@ namespace AdminUI.Controllers
                                                   {
                                                       Text = x.Name,
                                                       Value = x.DirectorId.ToString()
-                                                  }
-                                                ).ToList();
+                                                  }).ToList();
 
             List<SelectListItem> valuedepartment = (from y in departmentManager.GetList()
                                                     select new SelectListItem
@@ -44,10 +44,14 @@ namespace AdminUI.Controllers
             ViewBag.vlw = valuedirector;
             ViewBag.vlc = valuedepartment;
             return View();
+
         }
         [HttpPost]
         public ActionResult AddPersonel(Personel personel)
         {
+
+            personel.DateOfBirth = DateTime.Parse(DateTime.Now.ToShortDateString());
+            PersonelValidator personelValidator = new PersonelValidator();
             ValidationResult validationResult = personelValidator.Validate(personel);
             if (validationResult.IsValid)
             {
@@ -89,6 +93,7 @@ namespace AdminUI.Controllers
         [HttpPost]
         public ActionResult EditPersonel(Personel personel)
         {
+            personel.DateOfBirth = DateTime.Parse(DateTime.Now.ToShortDateString());
             personelManager.Update(personel);
             return RedirectToAction("PersonelList");
         }
@@ -98,5 +103,7 @@ namespace AdminUI.Controllers
             personelManager.Delete(result);
             return RedirectToAction("PersonelList");
         }
+
+
     }
 }

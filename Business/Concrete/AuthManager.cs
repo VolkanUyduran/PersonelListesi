@@ -2,10 +2,7 @@
 using Business.Utilities.Hashing;
 using Entities.Concrete;
 using Entities.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
@@ -19,35 +16,59 @@ namespace Business.Concrete
             _directorService = directorService;
         }
 
-        public bool Login(LoginDto loginDto)
+        public bool IsExitsAdmin()
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                var admin = _directorService.GetList();
-                foreach (var item in admin)
-                {
-                    if (HashingHelper.WriterVerifyPasswordHash(loginDto.AdminPassword, item.AdminPasswordHash, item.AdminPasswordSalt))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
+           return  _directorService.IsExitsAdmin();
         }
 
-        public void Register(string name, string mail, string password,int adminRole)
+        public Director Login(LoginDto loginDto)
         {
-            byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var admin = new Director
-            {
-                RoleId= adminRole,
-                Email = mail,
-                AdminPasswordHash = passwordHash,
-                AdminPasswordSalt = passwordSalt,
-                Name=name
-            };
-            _directorService.Add(admin);
+            var user = _directorService.GetUser(loginDto);
+
+            return user;
+
+
+            //using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            //{
+            //    var admin = _directorService.GetList();
+            //    foreach (var item in admin)
+            //    {
+            //        //if (HashingHelper.VerifyPasswordHash(loginDto.AdminPassword, item.AdminPasswordHash, item.AdminPasswordSalt))
+            //        //{
+            //        //    return true;
+            //        //}
+            //    }
+            //    return false;
+            //}
+        }
+
+        public async Task Register(string name, string mail, string password, int adminRole)
+        {
+            //byte[] passwordHash, passwordSalt;
+            //HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            //var admin = new Director
+            //{
+            //    RoleId = adminRole,
+            //    Email = mail,
+            //    AdminPasswordHash = passwordHash,
+            //    AdminPasswordSalt = passwordSalt,
+            //    Name = name
+            //};
+            //_directorService.Add(admin);
+
+
+            Director newUser = new Director();
+
+            newUser.RoleId = adminRole;
+            newUser.Email = mail;
+            newUser.Name = name;
+
+            var keyNew = Helper.GeneratePassword(10);
+            var hashPassowrd = Helper.EncodePassword(password, keyNew);
+            newUser.AdminPasswordHash = hashPassowrd;
+            newUser.AdminPasswordSalt = keyNew;
+
+            _directorService.Add(newUser);
         }
 
 

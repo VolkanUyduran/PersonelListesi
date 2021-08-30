@@ -15,8 +15,8 @@ namespace Entities.Concrete
         public string Name { get; set; }
         [StringLength(50)]
         public string Email { get; set; }
-        public byte[] AdminPasswordHash { get; set; }
-        public byte[] AdminPasswordSalt { get; set; }
+        public string AdminPasswordHash { get; set; }
+        public string AdminPasswordSalt { get; set; }
         public ICollection<Personel> Personels { get; set; }
 
         public int? RoleId { get; set; }

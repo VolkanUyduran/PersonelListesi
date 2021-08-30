@@ -4,6 +4,15 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+@if (ViewBag.Message!=null)
+{
+<script>
+        alert(@ViewBag.Message);
+        @ViewBag.Message=null;
+</script>
+}
+
+
 <table class="table table-hover">
     <br />
     <a href="/Department/AddDepartment" class="btn btn-primary">Yeni Departman Ekle</a>
@@ -22,8 +31,50 @@
             <td>@item.Name</td>
             <td> <a href="/Department/GetListDepartmentId/@item.DepartmentId" class="btn btn-primary">Çalışanlar</a></td>
             <td><a href="/Department/EditDepartment/@item.DepartmentId" class="btn btn-secondary">Güncelle</a></td>
-
-            <td> <a href="/Department/DeleteDepartment/@item.DepartmentId" class="btn btn-danger">Sil</a></td>
+            
+            <td> <a @*href="/Department/DeleteDepartment/@item.DepartmentId"*@ href="#" class="btn btn-danger deleteDepartment" data-id="@item.DepartmentId">Sil</a></td>
+            @Html.ValidationMessageFor(x=>x.Count)
         </tr>
     }
 </table>
+
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootbox.min.js"></script>
+<script>
+    $(".deleteDepartment").click(function () {
+
+        debugger;
+
+        var id = $(this).attr("data-id");
+        var closestTR = $(this).closest("tr");
+
+
+        $.ajax({
+            url: '/Department/DeleteDepartment?id=' + id,
+            type: 'POST',
+            success: function (d) {
+                if (d.failed == false) {
+                    closestTR.fadeOut(1000, function () {
+                        closestTR.remove();
+                    });
+
+                    alert(d.message);
+                    toastr.success(d.message, "Başarılı");
+                }
+                else {
+                    alert(d.message);
+                    toastr.error(d.message, "Hata");
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status == 403) {
+                    window.location.href = "/Account/AccessDenied";
+                }
+            }
+        });
+
+      
+
+    });
+</script>

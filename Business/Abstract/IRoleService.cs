@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
         List<Role> GetList();
         Role GetById(int id);
-        void Add(Role role);
+        Role Add(Role role);
         void Delete(Role role);
         void Update(Role role);
     }

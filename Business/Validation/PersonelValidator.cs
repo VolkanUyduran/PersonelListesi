@@ -1,10 +1,5 @@
 ﻿using Entities.Concrete;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Validation
 {
@@ -12,9 +7,9 @@ namespace Business.Validation
     {
         public PersonelValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Personel Adını Boş geçemezsiniz");
-            RuleFor(x => x.Surname).NotEmpty().WithMessage("Personel Soyadını Boş geçemezsiniz");
-            RuleFor(x => x.Tel).NotEmpty().WithMessage("Personel Telefon numarasını Boş geçemezsiniz");
+            RuleFor(x => x.Name).NotEmpty().NotNull().WithMessage("Personel Adını Boş geçemezsiniz");
+            RuleFor(x => x.Surname).NotEmpty().NotNull().WithMessage("Personel Soyadını Boş geçemezsiniz");
+            RuleFor(x => x.Tel).NotEmpty().NotNull().WithMessage("Personel Telefon numarasını Boş geçemezsiniz");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -18,7 +19,7 @@ namespace Business.Utilities.Hashing
 
             }
         }
-        public static bool WriterVerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+            public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACMD5(passwordSalt))
             {

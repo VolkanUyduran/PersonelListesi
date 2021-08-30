@@ -1,15 +1,13 @@
 ﻿using Business.Abstract;
+using Business.Validation;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
+using FluentValidation.Results;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-   public class DepartmentManager:IDepartmentService
+    public class DepartmentManager : IDepartmentService
     {
         IDepartmentDal _departmentDal;
 
@@ -22,12 +20,12 @@ namespace Business.Concrete
         {
             _departmentDal.Insert(department);
         }
-
         public void Delete(Department department)
         {
-            _departmentDal.Delete(department);
-        }
 
+            _departmentDal.Delete(department);
+
+        }
         public Department GetById(int id)
         {
             return _departmentDal.Get(x => x.DepartmentId == id);
@@ -42,5 +40,11 @@ namespace Business.Concrete
         {
             _departmentDal.Update(department);
         }
+
+        public int PersonelCountByDepartmentId(int departmentId) {
+            var personelCount = _departmentDal.PersonelCountByDepartmentId(departmentId);
+            return personelCount;
+        }
+
     }
 }
