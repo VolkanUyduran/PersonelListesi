@@ -53,15 +53,8 @@ to get the desired effect
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="~/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Volkan Uyduran</a>
-                    </div>
-                </div>
-
+                
+                @Html.Action("_UserPartial", "Home")
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -79,7 +72,7 @@ to get the desired effect
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="/Personel/PersonelList/" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Personel
                                 </p>
@@ -103,9 +96,17 @@ to get the desired effect
                         </li>
                         <li class="nav-item">
                             <a href="/Role/RoleList/" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-tree"></i>
                                 <p>
                                     Yetkilendirmeler
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/ErrorPage/Page404/" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Hata Sayfaları
                                 </p>
                             </a>
                         </li>

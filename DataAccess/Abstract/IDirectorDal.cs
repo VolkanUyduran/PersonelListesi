@@ -13,7 +13,7 @@ namespace DataAccess.Abstract
         Director GetUser(LoginDto dto);
         Director LoginCheck(LoginDto dto);
         bool IsExitsAdmin();
-  
 
+        string CheckDirectorRole(int Id);
     }
 }

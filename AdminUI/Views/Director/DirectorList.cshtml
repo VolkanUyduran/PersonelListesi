@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert(@ViewBag.Message);
+        @ViewBag.Message=null;
+    </script>
+}
 <table class="table table-hover">
     <br />
     <a href="/Register/Index" class="btn btn-primary">Yönetici Ekle</a>

@@ -2,6 +2,7 @@
 using Business.Concrete;
 using DataAccess.EntitiyFramework;
 using Entities.Concrete;
+using ImageResizer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,90 +16,59 @@ namespace AdminUI.Controllers
     {
         ImageFileManager imageFileManager = new ImageFileManager(new EFImageDal());
         // GET: Image
-        public ActionResult GetPersonelImage(int id)
+        [HttpGet]
+        public ActionResult GetPersonelImage(int id, ImageFile imageFile)
         {
-            var files = imageFileManager.GetListByPersonelId(id);
-            return View(files);
+            List<string> Listimg = new List<string>();
+            List<ImageFile> files = imageFileManager.GetListByPersonelId(id);
+            if (files.Count > 0)
+            {
+                foreach (ImageFile item in files)
+                {
+                    var imgsrc = item.ImagePath.Replace("\\", "/").Split('/');
+                    Listimg.Add(imgsrc[imgsrc.Length - 1].ToString());
+                }
+                ViewBag.ImgList = Listimg;
+                return View(files);
+            }
+            return RedirectToAction("PersonelList", "Personel");
         }
         [HttpGet]
         public ActionResult AddImage(int id)
         {
-
             var value = imageFileManager.GetListByPersonelId(id);
+            ProfileViewModel model = new ProfileViewModel();
+            model.FileInfoes = new DirectoryInfo(Server.MapPath("~/images/")).GetFiles();
+            return View(model);
 
-            ImageViewModel imageModel = new ImageViewModel() { FileAttach = null, Message = string.Empty, IsValid = false };
-
-            try { }
-            catch (Exception ex)
-            {
-                Console.Write(ex);
-            }
-            return this.View(imageModel);
         }
         [HttpPost]
-        public ActionResult AddImage(ImageViewModel imageModel, ImageFile imageFile)
+        public ActionResult AddImage(HttpPostedFileBase profileFile, ImageFile imageFile)
         {
-            string folderPath = Server.MapPath("~/Images/Gallery/");
-
-
-            if (!Directory.Exists(folderPath))
+            if (profileFile != null)
             {
-                Directory.CreateDirectory(folderPath);
-            }
+                string pic = System.IO.Path.GetFileName(profileFile.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/images/"), pic);
+                profileFile.SaveAs(path);
+                imageFile.ImageName = pic;
+                imageFile.ImagePath = path;
 
-            try
-            {
-                // Dogrulama Islemleri
-                if (ModelState.IsValid)
+                ResizeSettings resizeSetting = new ResizeSettings
                 {
-                    string fileName = Path.GetFileName(Request.Files[0].FileName);
-                    string expansion = Path.GetExtension(Request.Files[0].FileName);
-                    string path = "/Images/Gallery/" + fileName + expansion;
-
-                    //Dosya yükleme istek kontrolü
-                    if (Request.Files.Count > 0)
-                    {
-                        var fullPath = Server.MapPath("/Images/Gallery/") + fileName + expansion;
-                        //Resim dosyasi isim kontrolü
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Bu dosya adında başka bir resim mevcuttur";
-                        }
-                        else
-                        {
-                            Request.Files[0].SaveAs(Server.MapPath(path));
-                            imageFile.ImageName = fileName;
-                            imageFile.ImagePath = "/Images/Gallery/" + fileName + expansion;
-                            imageFileManager.Add(imageFile);
-                            //ViewBag.ActionMessage = "Resim yükleme başarıyla gerçekleşmiştir.";
-                            imageModel.Message = "'" + imageModel.FileAttach.FileName + "' dosya yükleme başarılı.   ";
-                            return RedirectToAction("AddImage");
-                        }
-                    }
-
-                    // Ayarlar - Dogrulama gecerliyse 
-                    //imageModel.Message = "'" + imageModel.FileAttach.FileName + "' dosya yükleme başarılı.   ";
-                    imageModel.IsValid = true;
-                }
-                else
-                {
-                    // Ayarlar - Dogrulama gecersizse  
-                    imageModel.Message = "'" + imageModel.FileAttach.FileName + "' dosya yükleme başarısız!   ";
-                    imageModel.IsValid = false;
-                }
+                    Width = 250,
+                    Height = 250,
+                    Format = "png"
+                };
+                ImageBuilder.Current.Build(path, path, resizeSetting);
+                imageFileManager.Add(imageFile);
             }
-            catch (Exception ex)
-            {
-                // Info  
-                Console.Write(ex);
-            }
-            return View(imageModel);
+            return RedirectToAction("AddImage");
         }
         public ActionResult DeleteImage(int Id)
         {
             var imageValues = imageFileManager.GetByIdImageFile(Id);
             imageFileManager.Delete(imageValues);
-            return RedirectToAction("GetPersonelImage/3");
+            return RedirectToAction("PersonelList", "Personel");
         }
 
     }

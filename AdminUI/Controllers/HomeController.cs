@@ -26,5 +26,11 @@ namespace AdminUI.Controllers
 
             return View();
         }
+
+        public ActionResult _UserPartial()
+        {
+            ViewBag.FullName = Session["UserFullName"].ToString();
+            return PartialView();
+        }
     }
 }

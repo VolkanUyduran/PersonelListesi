@@ -4,7 +4,6 @@ using Business.Utilities.Hashing;
 using DataAccess.EntitiyFramework;
 using Entities.Concrete;
 using Entities.Dto;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -22,17 +21,6 @@ namespace AdminUI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var isExitsAdmin = authService.IsExitsAdmin();
-            if (!isExitsAdmin)
-            {
-                var role = new Role();
-                role.RoleName = "adminRole";
-                var newRole=roleManager.Add(role);
-                if (newRole.RoleId!=0)
-                {
-                    var Register = authService.Register("admin", "admin@gmail.com", "12345", newRole.RoleId);
-                }  
-            }
             return View();
         }
         [AllowAnonymous]
@@ -63,6 +51,8 @@ namespace AdminUI.Controllers
                     //return View("../Admin/Registration"); url not change in browser    
                     FormsAuthentication.SetAuthCookie(loginDto.ToString(), false);
                     Session["Admin"] = loginDto;
+                    Session["DirectorId"] = getUser.DirectorId;
+                    Session["UserFullName"] = getUser.Name;
                     Session["Email"] = loginDto.AdminMail;
                     return RedirectToAction("PersonelList", "Personel");
                 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Business.Concrete
 {
-    public class DirectorManager:IDirectorService
+    public class DirectorManager : IDirectorService
     {
         IDirectorDal _directorDal;
 
@@ -59,10 +59,11 @@ namespace Business.Concrete
         {
             _directorDal.Update(director);
         }
-        public bool UpdatePassword(LoginDto dto,string newPassword) {
+        public bool UpdatePassword(LoginDto dto, string newPassword)
+        {
 
             var user = _directorDal.LoginCheck(dto);
-            if (user!=null)
+            if (user != null)
             {
                 var keyNew = Helper.GeneratePassword(10);
                 var hashPassowrd = Helper.EncodePassword(newPassword, keyNew);
@@ -74,6 +75,47 @@ namespace Business.Concrete
 
             }
             return false;
+        }
+        public string CheckDirectorRole(int Id)
+        {
+            return _directorDal.CheckDirectorRole(Id);
+        }
+
+        public bool IsDeletedAdmin(string LoginAdminRoleName, string DeletedAdminRoleName)
+        {
+            int LoginId = getRoleId(LoginAdminRoleName);
+            int DeletedId = getRoleId(DeletedAdminRoleName);
+
+            if (LoginId>DeletedId)
+            {
+                return true;
+            }
+            else if (LoginId < DeletedId)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private int getRoleId(string LoginAdminRoleName)
+        {
+            int RoleId=0;
+            switch (LoginAdminRoleName)
+            {
+                case "A":
+                    return RoleId = 3;
+                    break;
+                case "B":
+                    return RoleId = 2;
+                    break;
+                case "C":
+                    return RoleId = 1;
+                    break;
+            }
+            return RoleId;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace DataAccess.EntitiyFramework
         public bool IsExitsAdmin()
         {
             var user = c.Directors.Where(x => x.Email == "admin@gmail.com").FirstOrDefault();
-            if (user!=null)
+            if (user != null)
             {
                 return true;
             }
@@ -30,10 +30,17 @@ namespace DataAccess.EntitiyFramework
 
         public Director LoginCheck(LoginDto dto)
         {
-            var user = c.Directors.Where(x => x.Email == dto.AdminMail && x.AdminPasswordHash==dto.AdminPassword).FirstOrDefault();
+            var user = c.Directors.Where(x => x.Email == dto.AdminMail && x.AdminPasswordHash == dto.AdminPassword).FirstOrDefault();
             return user;
         }
 
- 
+        public string CheckDirectorRole(int Id)
+        {
+            string RoleDirectorName = c.Directors.Where(x => x.DirectorId == Id).Select(s => s.Role.RoleName).FirstOrDefault();
+            
+            return RoleDirectorName;
+        }
+
+
     }
 }

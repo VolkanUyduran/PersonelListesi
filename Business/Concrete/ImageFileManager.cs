@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SqlServer.Server;
 using System.Drawing.Drawing2D;
+using System.Web;
 
 namespace Business.Concrete
 {
@@ -69,6 +70,11 @@ namespace Business.Concrete
             {
                 return img.Height.ToString() + "," + img.Width.ToString();
             }
+        }
+
+        public void Add(HttpPostedFileBase profileFile)
+        {
+            throw new NotImplementedException();
         }
     }
 }

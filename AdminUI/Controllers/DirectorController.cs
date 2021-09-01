@@ -12,14 +12,27 @@ namespace AdminUI.Controllers
         RoleManager roleManager = new RoleManager(new EfRoleDal());
         public ActionResult DirectorList()
         {
-           var value= directorManager.GetList();
+            var value = directorManager.GetList();
             return View(value);
         }
         public ActionResult DeleteDirector(int id)
         {
-            var result = directorManager.GetById(id);
-            directorManager.Delete(result);
-            return RedirectToAction("DirectorList");
+            var LoginAdminId = int.Parse(Session["DirectorId"].ToString());
+            string LoginAdminRole = directorManager.CheckDirectorRole(LoginAdminId);
+            string DeletedAdminRole = directorManager.CheckDirectorRole(id);
+            bool IsSuccess = directorManager.IsDeletedAdmin(LoginAdminRole, DeletedAdminRole);
+            if (IsSuccess)
+            {
+                var result = directorManager.GetById(id);
+                directorManager.Delete(result);
+                return RedirectToAction("DirectorList");
+            }
+            else
+            {
+                return RedirectToAction("DirectorList");
+            }
+
+
         }
         [HttpGet]
         public ActionResult UpdateDirector(int id)
@@ -33,5 +46,7 @@ namespace AdminUI.Controllers
             directorManager.Update(director);
             return RedirectToAction("DirectorList");
         }
+
+
     }
 }

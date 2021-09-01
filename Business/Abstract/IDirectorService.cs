@@ -19,5 +19,6 @@ namespace Business.Abstract
         Director CheckLogin(LoginDto model);
         bool IsExitsAdmin();
         bool UpdatePassword(LoginDto dto, string newPassword);
+        string CheckDirectorRole(int Id);
     }
 }
